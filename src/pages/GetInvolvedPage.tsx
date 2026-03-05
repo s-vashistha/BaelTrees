@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import heroBanner from "@/assets/hero-banner.jpg";
 import missionImage from "@/assets/mission-image.jpg";
+import { submitVolunteerForm, isValidEmail } from "@/lib/formService";
 
 const opportunities = [
   { icon: Users, title: "Volunteer Programs", desc: "Join weekend plantation drives, river cleanups, and nursery work. We welcome individuals, families, and groups.", cta: "Sign Up to Volunteer" },
@@ -39,6 +40,53 @@ const faqsRight = [
 const GetInvolvedPage = () => {
   const [openFaqLeft, setOpenFaqLeft] = useState<number | null>(null);
   const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
+  
+  // Volunteer form state
+  const [volunteerData, setVolunteerData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    interestArea: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: "" });
+
+  const handleVolunteerChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    setVolunteerData(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleVolunteerSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    
+    // Validation
+    if (!volunteerData.firstName.trim() || !volunteerData.lastName.trim() || !volunteerData.email.trim()) {
+      setSubmitStatus({ type: 'error', message: "Please fill in all required fields." });
+      return;
+    }
+    
+    if (!isValidEmail(volunteerData.email)) {
+      setSubmitStatus({ type: 'error', message: "Please enter a valid email address." });
+      return;
+    }
+
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: "" });
+
+    try {
+      const result = await submitVolunteerForm(volunteerData);
+      if (result.success) {
+        setSubmitStatus({ type: 'success', message: "Thank you for signing up! We'll be in touch soon." });
+        setVolunteerData({ firstName: "", lastName: "", email: "", phone: "", interestArea: "" });
+      } else {
+        setSubmitStatus({ type: 'error', message: result.error || "Failed to submit application. Please try again." });
+      }
+    } catch (error) {
+      setSubmitStatus({ type: 'error', message: "An error occurred. Please try again later." });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <div className="min-h-screen">
@@ -80,7 +128,7 @@ const GetInvolvedPage = () => {
                 </motion.div>
               ))}
             </div>
-          </div>
+           </div> 
         </section>
 
         {/* Sign Up Form - Single Card with Image left, Form right */}
@@ -96,20 +144,60 @@ const GetInvolvedPage = () => {
                 {/* Form */}
                 <div className="p-8 flex flex-col justify-center space-y-4">
                   <h3 className="font-serif text-xl text-foreground mb-2">Join Our Green Movement</h3>
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    <input placeholder="First Name" className="w-full px-3 py-2.5 bg-background border border-border rounded-md text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" />
-                    <input placeholder="Last Name" className="w-full px-3 py-2.5 bg-background border border-border rounded-md text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" />
-                  </div>
-                  <input placeholder="Email Address" className="w-full px-3 py-2.5 bg-background border border-border rounded-md text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" />
-                  <input placeholder="Phone Number" className="w-full px-3 py-2.5 bg-background border border-border rounded-md text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" />
-                  <select className="w-full px-3 py-2.5 bg-background border border-border rounded-md text-sm text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary">
-                    <option>Select Interest Area</option>
-                    <option>Tree Plantation</option>
-                    <option>River Cleanup</option>
-                    <option>Community Programs</option>
-                    <option>Fundraising</option>
-                  </select>
-                  <Button className="w-full">Submit Application</Button>
+                  {submitStatus.type && (
+                    <div className={`p-3 rounded-md text-sm ${submitStatus.type === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'}`}>
+                      {submitStatus.message}
+                    </div>
+                  )}
+                  <form onSubmit={handleVolunteerSubmit}>
+                    <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                      <input 
+                        name="firstName"
+                        placeholder="First Name *" 
+                        value={volunteerData.firstName}
+                        onChange={handleVolunteerChange}
+                        className="w-full px-3 py-2.5 bg-background border border-border rounded-md text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" 
+                      />
+                      <input 
+                        name="lastName"
+                        placeholder="Last Name *" 
+                        value={volunteerData.lastName}
+                        onChange={handleVolunteerChange}
+                        className="w-full px-3 py-2.5 bg-background border border-border rounded-md text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" 
+                      />
+                    </div>
+                    <input 
+                      name="email"
+                      placeholder="Email Address *" 
+                      type="email"
+                      value={volunteerData.email}
+                      onChange={handleVolunteerChange}
+                      className="w-full px-3 py-2.5 bg-background border border-border rounded-md text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary mb-4" 
+                    />
+                    <input 
+                      name="phone"
+                      placeholder="Phone Number" 
+                      type="tel"
+                      value={volunteerData.phone}
+                      onChange={handleVolunteerChange}
+                      className="w-full px-3 py-2.5 bg-background border border-border rounded-md text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary mb-4" 
+                    />
+                    <select 
+                      name="interestArea"
+                      value={volunteerData.interestArea}
+                      onChange={handleVolunteerChange}
+                      className="w-full px-3 py-2.5 bg-background border border-border rounded-md text-sm text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary mb-4"
+                    >
+                      <option value="">Select Interest Area</option>
+                      <option>Tree Plantation</option>
+                      <option>River Cleanup</option>
+                      <option>Community Programs</option>
+                      <option>Fundraising</option>
+                    </select>
+                    <Button type="submit" className="w-full" disabled={isSubmitting}>
+                      {isSubmitting ? "Submitting..." : "Submit Application"}
+                    </Button>
+                  </form>
                 </div>
               </div>
             </motion.div>
