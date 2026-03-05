@@ -10,7 +10,7 @@ import energyImg from "@/assets/project-energy.jpg";
 const projects = [
   { title: "Agroforestry", desc: "Integrating trees with farming to boost biodiversity, soil health, and farmer livelihoods.", img: agroImg },
   { title: "Urban Forestry", desc: "Transforming city landscapes with tree-lined avenues, pocket forests, and green corridors.", img: urbanImg },
-  { title: "Lake Restoration", desc: "Reviving urban and rural lakes through desilting, bunding, and native plantation drives.", img: lakeImg },
+  { title: "River Restoration", desc: "Reviving urban and rural rivers through desilting, bunding, and native plantation drives.", img: lakeImg },
   { title: "Water Conservation", desc: "Building check dams, recharge wells, and rainwater harvesting systems.", img: waterImg },
   { title: "Climate Education", desc: "Empowering youth with environmental knowledge through workshops and school programs.", img: energyImg },
 ];

@@ -1,24 +1,27 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { X } from "lucide-react";
-import projectUrban from "@/assets/project-urban.jpg";
-import projectLake from "@/assets/project-lake.jpg";
-import projectAgroforestry from "@/assets/project-agroforestry.jpg";
-import projectWater from "@/assets/project-water.jpg";
-import projectEnergy from "@/assets/project-energy.jpg";
-import missionImage from "@/assets/mission-image.jpg";
+import { Link } from "react-router-dom";
 
-const images = [
-  { src: projectUrban, alt: "Urban forestry plantation drive" },
-  { src: projectLake, alt: "Lake restoration work" },
-  { src: projectAgroforestry, alt: "Agroforestry project with farmers" },
-  { src: projectWater, alt: "Water conservation initiative" },
-  { src: projectEnergy, alt: "Clean energy awareness program" },
-  { src: missionImage, alt: "Community volunteering event" },
+// Use the same images as GalleryPage "All" section (first 6 images)
+const allImages = [
+  // Plantations (first 2)
+  { src: "/selected plantation/IMG_20190603_094554 - Copy_result.webp", alt: "Plantation drive activity" },
+  { src: "/selected plantation/IMG_20180614_082512_result.webp", alt: "Sapling plantation in progress" },
+  // River Restoration (first 2)
+  { src: "/selected plantation/IMG-20190427-WA0046_result.webp", alt: "River restoration project" },
+  { src: "/selected plantation/IMG-20190505-WA0029_result.webp", alt: "Water body rejuvenation" },
+  // Community (first 1)
+  { src: "/selected plantation/IMG_20180618_095207_result.webp", alt: "Community gathering" },
+  // Events (first 1)
+  { src: "/selected plantation/IMG-20210805-WA0106_result.webp", alt: "Event celebration" },
 ];
 
 const GallerySection = () => {
   const [selected, setSelected] = useState<number | null>(null);
+  
+  // Show only 6 images
+  const displayImages = allImages.slice(0, 6);
 
   return (
     <section className="py-16 md:py-24 bg-secondary">
@@ -28,7 +31,7 @@ const GallerySection = () => {
           <h2 className="font-serif text-3xl md:text-4xl text-foreground">Photo Gallery</h2>
         </motion.div>
         <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4">
-          {images.map((img, i) => (
+          {displayImages.map((img, i) => (
             <motion.div
               key={i}
               initial={{ opacity: 0, scale: 0.95 }}
@@ -42,6 +45,16 @@ const GallerySection = () => {
             </motion.div>
           ))}
         </div>
+        
+        {/* View More Button */}
+        <div className="text-center mt-8">
+          <Link 
+            to="/gallery" 
+            className="inline-flex items-center justify-center px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-colors"
+          >
+            View More Photos
+          </Link>
+        </div>
       </div>
 
       {/* Lightbox */}
@@ -50,7 +63,7 @@ const GallerySection = () => {
           <button className="absolute top-4 right-4 text-primary-foreground" onClick={() => setSelected(null)} aria-label="Close">
             <X className="w-8 h-8" />
           </button>
-          <img src={images[selected].src} alt={images[selected].alt} className="max-w-full max-h-[85vh] rounded-lg object-contain" />
+          <img src={displayImages[selected].src} alt={displayImages[selected].alt} className="max-w-full max-h-[85vh] rounded-lg object-contain" />
         </div>
       )}
     </section>

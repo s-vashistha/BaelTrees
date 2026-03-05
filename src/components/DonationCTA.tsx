@@ -10,7 +10,7 @@ interface DonationCTAProps {
 
 const DonationCTA = ({
   title = "Every Tree Counts. Every Rupee Matters.",
-  subtitle = "Your donation helps us plant trees, restore lakes, and empower rural communities. Join 50,000+ supporters making a difference.",
+  subtitle = "Your donation helps us plant trees, restore riverss, and empower rural communities. Join 50,000+ supporters making a difference.",
 }: DonationCTAProps) => (
   <section className="py-16 md:py-20 bg-primary">
     <div className="container text-center">

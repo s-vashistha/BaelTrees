@@ -10,9 +10,9 @@ import heroBanner from "@/assets/hero-banner.jpg";
 import missionImage from "@/assets/mission-image.jpg";
 
 const opportunities = [
-  { icon: Users, title: "Volunteer Programs", desc: "Join weekend plantation drives, lake cleanups, and nursery work. We welcome individuals, families, and groups.", cta: "Sign Up to Volunteer" },
+  { icon: Users, title: "Volunteer Programs", desc: "Join weekend plantation drives, river cleanups, and nursery work. We welcome individuals, families, and groups.", cta: "Sign Up to Volunteer" },
   { icon: HeartHandshake, title: "Community Participation", desc: "Engage with local initiatives — from school green clubs to neighbourhood tree adoption programs.", cta: "Explore Programs" },
-  { icon: Megaphone, title: "Fundraising Campaigns", desc: "Start or support a fundraising campaign to plant trees, restore a lake, or sponsor a rural development project.", cta: "Start a Campaign" },
+  { icon: Megaphone, title: "Fundraising Campaigns", desc: "Start or support a fundraising campaign to plant trees, restore a river, or sponsor a rural development project.", cta: "Start a Campaign" },
 ];
 
 const volunteerTestimonials = [
@@ -105,7 +105,7 @@ const GetInvolvedPage = () => {
                   <select className="w-full px-3 py-2.5 bg-background border border-border rounded-md text-sm text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary">
                     <option>Select Interest Area</option>
                     <option>Tree Plantation</option>
-                    <option>Lake Cleanup</option>
+                    <option>River Cleanup</option>
                     <option>Community Programs</option>
                     <option>Fundraising</option>
                   </select>

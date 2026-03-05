@@ -5,7 +5,7 @@ import { useState } from "react";
 const videos = [
   { id: "dQw4w9WgXcQ", title: "BaelTrees – Our Journey So Far", description: "Watch how BaelTrees has been transforming landscapes and empowering communities across India." },
   { id: "ScMzIvxBSi4", title: "Mega Plantation Drive 2025", description: "Highlights from our annual mega plantation event that brought 5,000 volunteers together." },
-  { id: "LXb3EKWsInQ", title: "Lake Restoration Success Story", description: "See how we revived a dying urban lake back to its full ecological glory." },
+  { id: "LXb3EKWsInQ", title: "River Restoration Success Story", description: "See how we revived a dying urban river back to its full ecological glory." },
 ];
 
 const VideoSection = () => {

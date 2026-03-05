@@ -8,9 +8,9 @@ const GetInvolvedSection = () => {
   const { t } = useLanguage();
 
   const options = [
-    { icon: Users, title: t("Volunteer", "स्वयंसेवक बनें"), desc: t("Join weekend plantation drives and lake cleaning campaigns near you.", "अपने पास वीकेंड वृक्षारोपण अभियानों में शामिल हों।"), cta: t("Sign Up", "साइन अप"), link: "/get-involved" },
+    { icon: Users, title: t("Volunteer", "स्वयंसेवक बनें"), desc: t("Join weekend plantation drives and river cleaning campaigns near you.", "अपने पास वीकेंड वृक्षारोपण अभियानों में शामिल हों।"), cta: t("Sign Up", "साइन अप"), link: "/get-involved" },
     { icon: Calendar, title: t("Attend Events", "कार्यक्रमों में भाग लें"), desc: t("Participate in workshops, tree walks, and awareness programs.", "कार्यशालाओं, वृक्ष सैर और जागरूकता कार्यक्रमों में भाग लें।"), cta: t("View Events", "कार्यक्रम देखें"), link: "/events" },
-    { icon: Heart, title: t("Donate", "दान करें"), desc: t("Fund a sapling, a lake, or an entire project. Every rupee counts.", "एक पौधा, एक झील, या पूरी परियोजना को फंड करें।"), cta: t("Donate Now", "अभी दान करें"), link: "/donate" },
+    { icon: Heart, title: t("Donate", "दान करें"), desc: t("Fund a sapling, a river, or an entire project. Every rupee counts.", "एक पौधा, एक झील, या पूरी परियोजना को फंड करें।"), cta: t("Donate Now", "अभी दान करें"), link: "/donate" },
   ];
 
   return (

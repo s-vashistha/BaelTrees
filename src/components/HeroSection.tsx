@@ -10,7 +10,7 @@ import donateHero from "@/assets/donate-hero.jpg";
 
 const slides = [
   { image: heroBanner, headline: "Planting Trees. Restoring Earth.", accent: "Empowering Communities." },
-  { image: missionImage, headline: "Reviving Lakes. Saving Water.", accent: "Sustaining Life." },
+  { image: missionImage, headline: "Reviving Rivers. Saving Water.", accent: "Sustaining Life." },
   { image: aboutHero, headline: "Growing Forests. Healing the Planet.", accent: "One Tree at a Time." },
   { image: donateHero, headline: "Your Support Matters.", accent: "Join the Green Revolution." },
 ];

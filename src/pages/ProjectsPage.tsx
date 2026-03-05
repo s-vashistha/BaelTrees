@@ -18,7 +18,7 @@ const categories = ["All", "Forestry", "Water", "Rural", "Climate", "Corporate"]
 
 const allProjects = [
   { title: "Miyawaki Forest – HSR Layout", location: "Bengaluru", category: "Forestry", status: "Ongoing", trees: "5,000", img: urbanImg, desc: "Dense urban forest using the Miyawaki technique in a 2-acre plot." },
-  { title: "Jakkur Lake Restoration", location: "Bengaluru", category: "Water", status: "Completed", trees: "2,500", img: lakeImg, desc: "Complete lake rejuvenation including desilting, bunding, and bird habitat creation." },
+  { title: "Jakkur River Restoration", location: "Bengaluru", category: "Water", status: "Completed", trees: "2,500", img: lakeImg, desc: "Complete river rejuvenation including desilting, bunding, and bird habitat creation." },
   { title: "Haveri Farmer Agroforestry", location: "Karnataka", category: "Rural", status: "Ongoing", trees: "25,000", img: agroImg, desc: "Integrating fruit and timber trees into existing farming systems for 500+ farmers." },
   { title: "Corporate Green Campus – TechPark", location: "Hyderabad", category: "Corporate", status: "Completed", trees: "8,000", img: urbanImg, desc: "Transforming a 15-acre corporate campus into a green ecosystem." },
   { title: "Watershed Management – Ramanagara", location: "Karnataka", category: "Water", status: "Ongoing", trees: "10,000", img: waterImg, desc: "Building check dams and recharge structures across 50 villages." },
@@ -52,8 +52,8 @@ const ProjectsPage = () => {
               <img src={lakeImg} alt="Featured project" className="w-full h-64 md:h-full object-cover" loading="lazy" />
               <div className="p-8">
                 <span className="text-xs bg-primary text-primary-foreground px-2 py-1 rounded-sm font-medium">Ongoing</span>
-                <h3 className="font-serif text-2xl text-foreground mt-3 mb-2">Jakkur Lake Ecosystem Restoration</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">A comprehensive restoration of Jakkur Lake including desilting, native plantations, bird habitats, and community engagement programs.</p>
+                <h3 className="font-serif text-2xl text-foreground mt-3 mb-2">Jakkur River Ecosystem Restoration</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-4">A comprehensive restoration of Jakkur River including desilting, native plantations, bird habitats, and community engagement programs.</p>
                 <div className="flex gap-4 mb-4 text-sm">
                   <span className="flex items-center gap-1 text-primary"><MapPin className="w-4 h-4" /> Bengaluru</span>
                   <span className="flex items-center gap-1 text-leaf"><TreePine className="w-4 h-4" /> 2,500 trees</span>

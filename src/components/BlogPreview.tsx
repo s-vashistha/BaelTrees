@@ -16,8 +16,8 @@ const posts = [
   },
   {
     date: "Feb 12, 2026",
-    title: "5 Lakes Restored in 2025: A Year in Review",
-    excerpt: "Our lake restoration program brought back biodiversity and groundwater levels across Bengaluru.",
+    title: "5 Rivers Restored in 2025: A Year in Review",
+    excerpt: "Our River restoration program brought back biodiversity and groundwater levels across Bengaluru.",
     category: "Impact",
     image: projectLake,
   },

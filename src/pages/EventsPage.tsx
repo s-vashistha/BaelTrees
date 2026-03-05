@@ -40,7 +40,7 @@ const driveEvents = driveEventImages.map((img, index) => ({
     "Bael Sapling Distribution",
     "Bael Green Belt Development",
     "Bael for Schools Program",
-    "Bael Lake Area Greening",
+    "Bael River Area Greening",
     "Urban Bael Initiative",
     "Village Bael Afforestation",
     "Corporate Bael Drive",
@@ -64,12 +64,14 @@ const driveEvents = driveEventImages.map((img, index) => ({
 }));
 
 const pastEvents = [
-  { date: "Jan 26, 2019", title: "Bael Tree Plantation Drive", location: "Bengaluru", attendees: "800", trees: "3,000", description: "A massive Bael tree plantation drive on Republic Day where volunteers planted 3,000 native Bael saplings across Bengaluru's outskirts.", img: "https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800" },
-  { date: "Nov 1, 2019", title: "Bael Sapling Distribution Campaign", location: "Delhi", attendees: "1,200", trees: "5,000", description: "An awareness campaign distributing Bael saplings to households across 12 locations in Delhi NCR to promote environmental responsibility.", img: "https://images.unsplash.com/photo-1605100804763-247f67b3557e?w=800" },
-  { date: "Aug 15, 2019", title: "Bael Trees for Independence", location: "Mysuru", attendees: "2,000", trees: "8,000", description: "A Bael tree restoration event combined with guided nature walks, spiritual significance awareness, and environmental education workshops.", img: "https://images.unsplash.com/photo-1448375240586-882707db888b?w=800" },
-  { date: "Jun 5, 2019", title: "World Environment Day - Bael Plantation", location: "Mumbai", attendees: "3,500", trees: "12,000", description: "Our largest event of 2019 — a city-wide movement planting 12,000 Bael trees with corporate partners and citizen volunteers.", img: "https://images.unsplash.com/photo-1501854140801-50d01698950b?w=800" },
-  { date: "Apr 22, 2019", title: "Bael Tree Memorial Plantation", location: "Hyderabad", attendees: "600", trees: "1,500", description: "Community-driven plantation drive honoring loved ones through memorial Bael tree planting, restoring ecological balance.", img: "https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=800" },
-  { date: "Mar 21, 2019", title: "Bael Plantation Awareness Drive", location: "Bengaluru", attendees: "1,800", trees: "6,000", description: "A collaborative drive with schools and colleges planting 6,000 Bael saplings, educating youth about the spiritual and medicinal importance of Bael trees.", img: "https://images.unsplash.com/photo-1511497584788-876760111969?w=800" },
+  { date: "Jul 2017", title: "Purushottam Maas Bael Vriksharopan", location: "Various Locations", attendees: "500", trees: "2,000", description: "A sacred Bael tree plantation campaign conducted during the auspicious Purushottam month, combining spiritual significance with environmental conservation.", img: "/selected plantation/IMG_20180614_082331_result.webp" },
+  { date: "Aug 2017", title: "Prakriti-Satyagrah Shankhnaad", location: "Multiple Sites", attendees: "750", trees: "3,500", description: "An environmental satyagraha campaign raising awareness about ecological preservation and sustainable living practices.", img: "/selected plantation/IMG_20180522_111934_result.webp" },
+  { date: "Sep 2017", title: "Dudhabhishek-Hindan Bachao Abhiyan", location: "Rural Areas", attendees: "400", trees: "1,800", description: "Campaign focused on protecting sacred groves and traditional water bodies through community participation.", img: "/selected plantation/IMG-20190511-WA0070_result.webp" },
+  { date: "Jul 2019", title: "Ped Lagayen, Srishti Bachayen", location: "Various Districts", attendees: "1,200", trees: "5,000", description: "Plant trees to save creation - a massive community drive involving schools, colleges, and local communities.", img: "/selected plantation/IMG_20190731_134310_result.webp" },
+  { date: "Aug 2021", title: "Anshan (Paryavaran Raksharths)", location: "Urban & Rural", attendees: "900", trees: "4,200", description: "Environmental warriors campaign dedicated to protecting nature and promoting ecological balance.", img: "/selected plantation/IMG_20210829_154851_result.webp" },
+  { date: "Apr 2021", title: "Shivmay Bharat", location: "Pan India", attendees: "2,500", trees: "10,000", description: "A nationwide Bael plantation initiative inspired by Lord Shiva, connecting spirituality with environmental action.", img: "/selected plantation/IMG_20180618_095210_result.webp" },
+  { date: "Oct 2021", title: "Bael Vriksha Bank", location: "Regional Centers", attendees: "600", trees: "2,500", description: "Establishing community-owned Bael tree banks to ensure long-term sustainability and conservation of Bael species.", img: "/selected plantation/IMG_20211015_161255_result.webp" },
+  { date: "Jan 2019", title: "Bael Tree Plantation Drive", location: "Bengaluru", attendees: "800", trees: "3,000", description: "A massive Bael tree plantation drive on Republic Day where volunteers planted 3,000 native Bael saplings across Bengaluru's outskirts.", img: "/selected plantation/IMG-20210805-WA0106_result.webp" },
 ];
 
 const ITEMS_PER_PAGE = 8;

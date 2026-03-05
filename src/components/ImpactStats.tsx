@@ -3,7 +3,7 @@ import { TreePine, Droplets, Users, MapPin } from "lucide-react";
 
 const stats = [
   { icon: TreePine, value: "3,50,000+", label: "Trees Planted", color: "text-primary" },
-  { icon: Droplets, value: "45+", label: "Lakes Restored", color: "text-sky" },
+  { icon: Droplets, value: "45+", label: "Rivers Restored", color: "text-sky" },
   { icon: Users, value: "15,000+", label: "Farmers Supported", color: "text-earth" },
   { icon: MapPin, value: "50,000+", label: "Volunteers Engaged", color: "text-leaf" },
 ];

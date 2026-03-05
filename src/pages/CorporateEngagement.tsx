@@ -10,7 +10,7 @@ import corporateHero from "@/assets/corporate-hero.jpg";
 
 const csrModels = [
   { icon: TreePine, title: "Tree Plantation Drives", desc: "Organize large-scale plantation drives for employees across 50+ locations. Each drive includes site selection, sapling procurement, and long-term maintenance." },
-  { icon: Droplets, title: "Lake Rejuvenation", desc: "Adopt a lake for comprehensive restoration — desilting, bunding, native plantations, and community stewardship setup." },
+  { icon: Droplets, title: "River Rejuvenation", desc: "Adopt a river for comprehensive restoration — desilting, bunding, native plantations, and community stewardship setup." },
   { icon: Leaf, title: "Carbon Offset Programs", desc: "Plant verified carbon-sequestering forests to offset your organization's carbon footprint with measurable impact data." },
   { icon: Users, title: "Employee Engagement", desc: "Team-building plantation events, nature walks, and environmental workshops that boost morale and ESG credentials." },
 ];

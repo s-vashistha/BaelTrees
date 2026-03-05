@@ -17,10 +17,10 @@ import donateHero from "@/assets/donate-hero.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 
 const resources = [
-  { title: "BaelTrees in The Hindu: Lake Revival Success", date: "Nov 5, 2025", excerpt: "Media coverage of our successful Jakkur Lake restoration project.", image: projectWater },
+  { title: "BaelTrees in The Hindu: River Revival Success", date: "Nov 5, 2025", excerpt: "Media coverage of our successful Jakkur River restoration project.", image: projectWater },
   { title: "BaelTrees Wins National Green Award", date: "Sep 2025", excerpt: "Recognition for best NGO in afforestation at the National Environment Awards.", image: donateHero },
   { title: "Times of India: Mega Plantation Drive in Bengaluru", date: "Aug 2025", excerpt: "Front-page coverage of our record-breaking 10,000 tree plantation in a single day.", image: projectUrban },
-  { title: "Deccan Herald: Community Lake Restoration", date: "Jul 2025", excerpt: "Feature article on how local communities partnered with BaelTrees for lake revival.", image: projectLake },
+  { title: "Deccan Herald: Community River Restoration", date: "Jul 2025", excerpt: "Feature article on how local communities partnered with BaelTrees for river revival.", image: projectLake },
   { title: "Indian Express: Agroforestry Impact on Rural Karnataka", date: "Jun 2025", excerpt: "In-depth reporting on farmer livelihood improvements through our agroforestry program.", image: projectAgroforestry },
   { title: "Bangalore Mirror: Urban Greening Initiative", date: "May 2025", excerpt: "Photo essay showcasing the transformation of urban spaces into green corridors.", image: missionImage },
   { title: "The New Indian Express: Water Conservation Success", date: "Apr 2025", excerpt: "Coverage of our check dam project reviving dry streams in drought-prone regions.", image: projectEnergy },

@@ -12,7 +12,7 @@ const amounts = [500, 1000, 2500, 5000, 10000];
 const impactMap: Record<number, string> = {
   500: "plants 5 native trees",
   1000: "plants 10 trees + maintenance for 1 year",
-  2500: "restores 50 sqft of lakeside habitat",
+  2500: "restores 50 sqft of riverside habitat",
   5000: "supports 1 farmer's agroforestry transition",
   10000: "funds a micro-watershed structure",
 };
@@ -25,7 +25,7 @@ const stories = [
 const faqsLeft = [
   { q: "Is my donation tax-deductible?", a: "Yes! All donations are eligible for 50% tax deduction under Section 80G of the Income Tax Act." },
   { q: "How is my money used?", a: "100% of your donation goes towards sapling procurement, site preparation, planting, and 3-year maintenance and monitoring." },
-  { q: "Can I donate for a specific project?", a: "Yes, you can choose to direct your donation to a specific program like Lake Restoration or Agroforestry." },
+  { q: "Can I donate for a specific project?", a: "Yes, you can choose to direct your donation to a specific program like River Restoration or Agroforestry." },
   { q: "Do I receive a receipt?", a: "Yes, we issue 80G receipts for all donations via email within 48 hours." },
   { q: "Can I donate in someone's name?", a: "Absolutely! We offer gift-a-tree certificates where you can dedicate trees in someone's name for birthdays, anniversaries, or memorials." },
 ];
@@ -61,7 +61,7 @@ const DonatePage = () => {
               {t("Your Contribution", "आपका योगदान")} <span className="text-accent">{t("Plants Hope", "आशा रोपता है")}</span>
             </motion.h1>
             <motion.p initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.2 }} className="mt-4 text-primary-foreground/80 text-lg max-w-xl mx-auto">
-              {t("Every rupee goes directly towards planting trees, restoring lakes, and empowering communities.", "हर रुपया सीधे पेड़ लगाने, झीलों को बहाल करने और समुदायों को सशक्त बनाने में जाता है।")}
+              {t("Every rupee goes directly towards planting trees, restoring rivers, and empowering communities.", "हर रुपया सीधे पेड़ लगाने, झीलों को बहाल करने और समुदायों को सशक्त बनाने में जाता है।")}
             </motion.p>
           </div>
         </section>
