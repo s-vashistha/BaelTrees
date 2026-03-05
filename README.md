@@ -31,3 +31,9 @@ npm run dev
 cd backend
 npm install
 npm run dev
+
+### Payment Integration
+To make it fully functional:
+Update the UPI ID in frontend/src/lib/formService.ts:
+
+vpa: 'YourRealUPI@upi',  // e.g., 'baeltrees@sbi

@@ -2,10 +2,11 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { motion } from "framer-motion";
 import { useState } from "react";
-import { Heart, TreePine, Droplets, Shield, Quote, ChevronDown, QrCode, Building2, CreditCard } from "lucide-react";
+import { Heart, TreePine, Droplets, Shield, Quote, ChevronDown, QrCode, Building2, CreditCard, Smartphone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import donateHero from "@/assets/donate-hero.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { generateUpiPaymentLink, initiateUpiPayment, isUpiSupported } from "@/lib/formService";
 
 const amounts = [500, 1000, 2500, 5000, 10000];
 
@@ -44,9 +45,31 @@ const DonatePage = () => {
   const [isCustom, setIsCustom] = useState(false);
   const [openFaqLeft, setOpenFaqLeft] = useState<number | null>(null);
   const [openFaqRight, setOpenFaqRight] = useState<number | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<'upi' | 'qr'>('upi');
   const { t } = useLanguage();
 
   const activeAmount = isCustom ? Number(custom) || 0 : selected;
+
+  // Handle donation button click - initiates UPI payment
+  const handleDonate = () => {
+    if (activeAmount <= 0) return;
+    
+    // Generate transaction note based on amount
+    const impact = impactMap[activeAmount] || `plants approximately ${Math.floor(activeAmount / 100)} trees`;
+    const note = `Donation to BaelTrees - ${impact}`;
+    
+    // Try to initiate UPI payment
+    const upiOpened = initiateUpiPayment(activeAmount, note);
+    
+    // If UPI didn't open (desktop), show QR section
+    if (!upiOpened) {
+      // Scroll to QR section
+      document.getElementById('qr-payment')?.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Generate UPI link for QR code display
+  const upiLink = activeAmount > 0 ? generateUpiPaymentLink(activeAmount, `Donation - ${impactMap[activeAmount] || 'Trees'}`) : '';
 
   return (
     <div className="min-h-screen">
@@ -86,13 +109,21 @@ const DonatePage = () => {
                   <p className="text-sm text-foreground"><span className="font-semibold text-primary">₹{activeAmount.toLocaleString()}</span> {impactMap[activeAmount] || `plants approximately ${Math.floor(activeAmount / 100)} trees`}</p>
                 </div>
               )}
-              <Button size="lg" className="w-full text-base gap-2"><Heart className="w-5 h-5" /> {t("Donate", "दान करें")} ₹{activeAmount.toLocaleString()}</Button>
+              <Button 
+                size="lg" 
+                className="w-full text-base gap-2"
+                onClick={handleDonate}
+                disabled={activeAmount <= 0}
+              >
+                <Smartphone className="w-5 h-5" /> 
+                {t("Donate with UPI", "UPI से दान करें")} ₹{activeAmount.toLocaleString()}
+              </Button>
             </motion.div>
           </div>
         </section>
 
         {/* QR Code & Bank Details */}
-        <section className="py-16 md:py-24 bg-secondary">
+        <section id="qr-payment" className="py-16 md:py-24 bg-secondary">
           <div className="container max-w-4xl">
             <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="font-serif text-3xl md:text-4xl text-foreground text-center mb-10">{t("Other Ways to Donate", "दान करने के अन्य तरीके")}</motion.h2>
             <div className="grid md:grid-cols-2 gap-8">
@@ -105,7 +136,13 @@ const DonatePage = () => {
                     <p className="text-xs text-muted-foreground">UPI QR Code</p>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground">UPI ID: <span className="font-semibold text-foreground">BaelTrees@upi</span></p>
+                <p className="text-sm text-muted-foreground mb-2">UPI ID: <span className="font-semibold text-foreground">BaelTrees@upi</span></p>
+                {activeAmount > 0 && (
+                  <div className="bg-green-50 text-green-700 px-4 py-2 rounded-lg text-sm font-medium">
+                    Pay ₹{activeAmount.toLocaleString()}
+                  </div>
+                )}
+                <p className="text-xs text-muted-foreground mt-3">Scan with any UPI app (GPay, PhonePe, Paytm)</p>
               </motion.div>
               <motion.div initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-card rounded-lg border border-border p-8">
                 <Building2 className="w-12 h-12 text-primary mx-auto mb-4" />
