@@ -70,7 +70,7 @@ const DonatePage = () => {
         <section className="py-16 md:py-24 bg-card">
           <div className="container max-w-2xl">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="bg-background rounded-lg border border-border p-8">
-              <h2 className="font-serif text-2xl text-foreground text-center mb-6">{t("Choose Your Impact", "अपना प्रभाव चुनें")}</h2>
+              <h2 className="font-serif text-3xl md:text-4xl text-foreground text-center mb-6">{t("Choose Your Impact", "अपना प्रभाव चुनें")}</h2>
               <div className="grid grid-cols-3 sm:grid-cols-5 gap-3 mb-4">
                 {amounts.map((amt) => (
                   <button key={amt} onClick={() => { setSelected(amt); setIsCustom(false); }} className={`py-3 rounded-lg text-sm font-semibold transition-colors border ${!isCustom && selected === amt ? "bg-primary text-primary-foreground border-primary" : "bg-card text-foreground border-border hover:border-primary"}`}>
@@ -94,7 +94,7 @@ const DonatePage = () => {
         {/* QR Code & Bank Details */}
         <section className="py-16 md:py-24 bg-secondary">
           <div className="container max-w-4xl">
-            <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="font-serif text-3xl text-foreground text-center mb-10">{t("Other Ways to Donate", "दान करने के अन्य तरीके")}</motion.h2>
+            <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="font-serif text-3xl md:text-4xl text-foreground text-center mb-10">{t("Other Ways to Donate", "दान करने के अन्य तरीके")}</motion.h2>
             <div className="grid md:grid-cols-2 gap-8">
               <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} className="bg-card rounded-lg border border-border p-8 text-center">
                 <QrCode className="w-12 h-12 text-primary mx-auto mb-4" />
@@ -151,7 +151,7 @@ const DonatePage = () => {
         {/* Donor Stories */}
         <section className="py-16 md:py-24 bg-background">
           <div className="container max-w-4xl">
-            <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="font-serif text-3xl text-foreground text-center mb-12">{t("Donor Stories", "दानदाता कहानियां")}</motion.h2>
+            <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="font-serif text-3xl md:text-4xl text-foreground text-center mb-12">{t("Donor Stories", "दानदाता कहानियां")}</motion.h2>
             <div className="grid md:grid-cols-2 gap-6">
               {stories.map((s, i) => (
                 <motion.div key={i} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-card rounded-lg p-6 border border-border">
@@ -168,7 +168,7 @@ const DonatePage = () => {
         {/* FAQ - 2 Columns */}
         <section className="py-16 md:py-24 bg-secondary">
           <div className="container">
-            <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="font-serif text-3xl text-foreground text-center mb-10">{t("Donation FAQs", "दान संबंधी प्रश्न")}</motion.h2>
+            <motion.h2 initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="font-serif text-3xl md:text-4xl text-foreground text-center mb-10">{t("Donation FAQs", "दान संबंधी प्रश्न")}</motion.h2>
             <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
               <div className="space-y-3">
                 {faqsLeft.map((faq, i) => (
