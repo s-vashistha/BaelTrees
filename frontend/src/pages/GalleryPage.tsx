@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useState } from "react";
 import { X, Play, ChevronRight } from "lucide-react";
 import heroBanner from "@/assets/hero-banner.jpg";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 // Image paths from public/selected plantation - Plantation section (7 images)
 const plantationImages = [
@@ -56,8 +57,6 @@ const eventsImages = [
   "/selected plantation/IMG_20180522_111934_result.webp",
   "/selected plantation/IMG_20190731_134310_result.webp",
 ];
-
-const galleryCategories = ["All", "Plantations", "River Restoration", "Events", "Community"];
 
 // All images combined with categories
 const allImages = [
@@ -116,6 +115,15 @@ const GalleryPage = () => {
   const [filter, setFilter] = useState("All");
   const [playingVideo, setPlayingVideo] = useState<number | null>(null);
   const [visibleCount, setVisibleCount] = useState(4);
+  const { t, lang } = useLanguage();
+
+  const galleryCategories = [
+    { en: "All", hi: "सभी" },
+    { en: "Plantations", hi: "वृक्षारोपण" },
+    { en: "River Restoration", hi: "नदी पुनर्स्थापन" },
+    { en: "Events", hi: "कार्यक्रम" },
+    { en: "Community", hi: "समुदाय" },
+  ];
 
   // For "All" filter, show 4 latest from each category (16 images)
   // For specific category, show only 4
@@ -172,8 +180,14 @@ const GalleryPage = () => {
 
             {/* Filters */}
             <div className="flex flex-wrap gap-2 justify-center mb-10">
-              {galleryCategories.map((cat) => (
-                <button key={cat} onClick={() => handleFilterChange(cat)} className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${filter === cat ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground hover:bg-primary/10"}`}>{cat}</button>
+{galleryCategories.map((cat) => (
+                <button 
+                  key={cat.en} 
+                  onClick={() => handleFilterChange(cat.en)} 
+                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${filter === cat.en ? "bg-primary text-primary-foreground" : "bg-secondary text-secondary-foreground hover:bg-primary/10"}`}
+                >
+                  {lang === "hi" ? cat.hi : cat.en}
+                </button>
               ))}
             </div>
 

@@ -6,30 +6,53 @@ import { Button } from "@/components/ui/button";
 import { 
   MapPin, Phone, Mail, Clock, 
   ChevronDown, CheckCircle2, AlertCircle, 
-  Users, Globe, Award, Leaf
+  Users, Globe, Award, Leaf, MessageCircle
 } from "lucide-react";
 import heroBanner from "@/assets/hero-banner.jpg";
 import { useState } from "react";
 import { submitContactForm, isValidEmail, isValidPhone } from "@/lib/formService";
+import { CONFIG } from "@/lib/config";
+import { useLanguage } from "@/contexts/LanguageContext";
 
-// FAQ Data
+// FAQ Data - Store as objects with both languages
 const faqs = [
-  { q: "What are your working hours?", a: "Our office is open Monday through Saturday, from 9:00 AM to 6:00 PM. We're available for emergencies outside these hours." },
-  { q: "How quickly will I get a response?", a: "We typically respond to all inquiries within 24-48 business hours." },
-  { q: "Can I volunteer at your office?", a: "Absolutely! We welcome visitors at our Bengaluru office. Please schedule an appointment by calling us or filling out the contact form." },
-  { q: "Do you offer site visits for potential donors?", a: "Yes, we organize regular field visits for donors and supporters to see our plantation sites and projects. Contact us to schedule one." },
-  { q: "How can I partner with BaelTrees for corporate CSR?", a: "We have dedicated CSR programs for corporate partners. Please reach out to discuss partnership opportunities." },
-  { q: "Is my donation tax-deductible?", a: "Yes, all donations to BaelTrees Environmental Trust are eligible for tax benefits under Section 80G of the Indian Income Tax Act." },
+  { 
+    q: { en: "What are your working hours?", hi: "आपके कार्यालय के किस घंटे हैं?" }, 
+    a: { en: "Our office is open Monday through Saturday, from 9:00 AM to 6:00 PM. We're available for emergencies outside these hours.", hi: "हमारा कार्यालय सोमवार से शनिवार सुबह 9:00 बजे से शाम 6:00 बजे तक खुला रहता है। आपातकालीन स्थिति में इन घंटों के बाद भी हम उपलब्ध हैं।" } 
+  },
+  { 
+    q: { en: "How quickly will I get a response?", hi: "मुझे कितनी जल्दी प्रतिक्रिया मिलेगी?" }, 
+    a: { en: "We typically respond to all inquiries within 24-48 business hours.", hi: "हम आमतौर पर 24-48 कार्य घंटों के भीतर सभी पूछताछ का जवाब देते हैं।" } 
+  },
+  { 
+    q: { en: "Can I volunteer at your office?", hi: "क्या मैं आपके कार्यालय में स्वयंसेवक बन सकता हूं?" }, 
+    a: { en: "Absolutely! We welcome visitors at our Bengaluru office. Please schedule an appointment by calling us or filling out the contact form.", hi: "बिल्कुल! हम अपने बेंगलुरु कार्यालय में आगंतुकों का स्वागत करते हैं। कृपया हमें कॉल करके या संपर्क फॉर्म भरकर अपोइंटमेंट शेड्यूल करें।" } 
+  },
+  { 
+    q: { en: "Do you offer site visits for potential donors?", hi: "क्या आप संभावित दाताओं के लिए साइट विजिट की पेशकश करते हैं?" }, 
+    a: { en: "Yes, we organize regular field visits for donors and supporters to see our plantation sites and projects. Contact us to schedule one.", hi: "हां, हम दाताओं और समर्थकों के लिए नियमित फील्ड विजिट का आयोजन करते हैं ताकि वे हमारे वृक्षारोपण स्थलों और परियोजनाओं को देख सकें। शेड्यूल करने के लिए हमसे संपर्क करें।" } 
+  },
+  { 
+    q: { en: "How can I partner with BaelTrees for corporate CSR?", hi: "मैं कॉरपोरेट CSR के लिए BaelTrees के साथ साझेदारी कैसे कर सकता हूं?" }, 
+    a: { en: "We have dedicated CSR programs for corporate partners. Please reach out to discuss partnership opportunities.", hi: "हमारे पास कॉरपोरेट भागीदारों के लिए समर्पित CSR कार्यक्रम हैं। साझेदारी के अवसरों पर चर्चा के लिए कृपया संपर्क करें।" } 
+  },
+  { 
+    q: { en: "Is my donation tax-deductible?", hi: "क्या मेरा दान कर कटौती योग्य है?" }, 
+    a: { en: "Yes, all donations to BaelTrees Environmental Trust are eligible for tax benefits under Section 80G of the Indian Income Tax Act.", hi: "हां, भारतीय आयकर अधिनियम की धारा 80G के तहत BaelTrees पर्यावरण ट्रस्ट को सभी दान कर लाभ के लिए पात्र हैं।" } 
+  },
 ];
 
+// Stats data with both languages
 const stats = [
-  { icon: Users, value: "5000+", label: "Happy Donors" },
-  { icon: Globe, value: "50+", label: "Partner NGOs" },
-  { icon: Award, value: "15+", label: "Years Experience" },
-  { icon: MapPin, value: "100+", label: "Projects Completed" },
+  { icon: Users, value: "5000+", label: { en: "Happy Donors", hi: "खुश दाता" } },
+  { icon: Globe, value: "50+", label: { en: "Partner NGOs", hi: "भागीदार एनजीओ" } },
+  { icon: Award, value: "15+", label: { en: "Years Experience", hi: "वर्षों का अनुभव" } },
+  { icon: MapPin, value: "100+", label: { en: "Projects Completed", hi: "पूरी की गई परियोजनाएं" } },
 ];
 
 const ContactPage = () => {
+  const { t } = useLanguage(); // t expects two arguments: (en: string, hi: string)
+  
   const [formData, setFormData] = useState({
     fullName: "",
     email: "",
@@ -47,21 +70,21 @@ const ContactPage = () => {
     
     switch (name) {
       case "fullName":
-        if (!value.trim()) newErrors.fullName = "Full name is required";
+        if (!value.trim()) newErrors.fullName = t("Full name is required", "पूरा नाम आवश्यक है");
         else delete newErrors.fullName;
         break;
       case "email":
-        if (!value.trim()) newErrors.email = "Email is required";
-        else if (!isValidEmail(value)) newErrors.email = "Please enter a valid email";
+        if (!value.trim()) newErrors.email = t("Email is required", "ईमेल आवश्यक है");
+        else if (!isValidEmail(value)) newErrors.email = t("Please enter a valid email", "कृपया एक मान्य ईमेल दर्ज करें");
         else delete newErrors.email;
         break;
       case "phone":
-        if (value && !isValidPhone(value)) newErrors.phone = "Please enter a valid phone number";
+        if (value && !isValidPhone(value)) newErrors.phone = t("Please enter a valid phone number", "कृपया एक मान्य फोन नंबर दर्ज करें");
         else delete newErrors.phone;
         break;
       case "message":
-        if (!value.trim()) newErrors.message = "Message is required";
-        else if (value.trim().length < 10) newErrors.message = "Message should be at least 10 characters";
+        if (!value.trim()) newErrors.message = t("Message is required", "संदेश आवश्यक है");
+        else if (value.trim().length < 10) newErrors.message = t("Message should be at least 10 characters", "संदेश कम से कम 10 अक्षरों का होना चाहिए");
         else delete newErrors.message;
         break;
     }
@@ -83,12 +106,12 @@ const ContactPage = () => {
     
     // Validate all fields
     const newErrors: Record<string, string> = {};
-    if (!formData.fullName.trim()) newErrors.fullName = "Full name is required";
-    if (!formData.email.trim()) newErrors.email = "Email is required";
-    else if (!isValidEmail(formData.email)) newErrors.email = "Please enter a valid email";
-    if (formData.phone && !isValidPhone(formData.phone)) newErrors.phone = "Please enter a valid phone number";
-    if (!formData.message.trim()) newErrors.message = "Message is required";
-    else if (formData.message.trim().length < 10) newErrors.message = "Message should be at least 10 characters";
+    if (!formData.fullName.trim()) newErrors.fullName = t("Full name is required", "पूरा नाम आवश्यक है");
+    if (!formData.email.trim()) newErrors.email = t("Email is required", "ईमेल आवश्यक है");
+    else if (!isValidEmail(formData.email)) newErrors.email = t("Please enter a valid email", "कृपया एक मान्य ईमेल दर्ज करें");
+    if (formData.phone && !isValidPhone(formData.phone)) newErrors.phone = t("Please enter a valid phone number", "कृपया एक मान्य फोन नंबर दर्ज करें");
+    if (!formData.message.trim()) newErrors.message = t("Message is required", "संदेश आवश्यक है");
+    else if (formData.message.trim().length < 10) newErrors.message = t("Message should be at least 10 characters", "संदेश कम से कम 10 अक्षरों का होना चाहिए");
     
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
@@ -101,14 +124,23 @@ const ContactPage = () => {
     try {
       const result = await submitContactForm(formData);
       if (result.success) {
-        setSubmitStatus({ type: 'success', message: "Thank you! Your message has been sent successfully." });
+        setSubmitStatus({ 
+          type: 'success', 
+          message: t("Thank you! Your message has been sent successfully.", "धन्यवाद! आपका संदेश सफलतापूर्वक भेज दिया गया है।") 
+        });
         setFormData({ fullName: "", email: "", phone: "", subject: "", message: "" });
         setErrors({});
       } else {
-        setSubmitStatus({ type: 'error', message: result.error || "Failed to send message. Please try again." });
+        setSubmitStatus({ 
+          type: 'error', 
+          message: result.error || t("Failed to send message. Please try again.", "संदेश भेजने में विफल। कृपया पुनः प्रयास करें।") 
+        });
       }
     } catch (error) {
-      setSubmitStatus({ type: 'error', message: "An error occurred. Please try again later." });
+      setSubmitStatus({ 
+        type: 'error', 
+        message: t("An error occurred. Please try again later.", "एक त्रुटि हुई। कृपया बाद में पुनः प्रयास करें।") 
+      });
     } finally {
       setIsSubmitting(false);
     }
@@ -119,12 +151,12 @@ const ContactPage = () => {
       <Navbar />
       <main className="pt-16 md:pt-20">
         <PageHero 
-          title="Contact Us" 
-          subtitle="Get in touch with our team. We'd love to hear from you." 
+          title={t("Contact Us", "संपर्क करें")}
+          subtitle={t("Get in touch with our team. We'd love to hear from you.", "हमारी टीम से संपर्क करें। हम आपसे सुनना पसंद करेंगे।")}
           image={heroBanner} 
         />
 
-        {/* Stats Section - Matching original color scheme */}
+        {/* Stats Section */}
         <section className="py-12 md:py-16 bg-secondary/30">
           <div className="container">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
@@ -141,7 +173,9 @@ const ContactPage = () => {
                     <stat.icon className="w-6 h-6" />
                   </div>
                   <div className="font-bold text-2xl text-foreground">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div className="text-sm text-muted-foreground">
+                    {t(stat.label.en, stat.label.hi)}
+                  </div>
                 </motion.div>
               ))}
             </div>
@@ -151,7 +185,7 @@ const ContactPage = () => {
         <section className="py-16 md:py-24 bg-background">
           <div className="container">
             <div className="grid md:grid-cols-2 gap-10 max-w-5xl mx-auto">
-              {/* Contact Info - Matching original styling with equal height */}
+              {/* Contact Info */}
               <motion.div 
                 initial={{ opacity: 0, x: -20 }} 
                 whileInView={{ opacity: 1, x: 0 }} 
@@ -160,10 +194,10 @@ const ContactPage = () => {
               >
                 <div className="inline-flex items-center gap-2 bg-primary/10 text-primary px-3 py-1 rounded-full mb-4 w-fit">
                   <Leaf className="w-4 h-4" />
-                  <span className="text-xs font-medium">Get in Touch</span>
+                  <span className="text-xs font-medium">{t("Get in Touch", "संपर्क करें")}</span>
                 </div>
                 
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">Contact Information</h2>
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">{t("Contact Information", "संपर्क जानकारी")}</h2>
                 
                 <div className="space-y-5 flex-1">
                   <div className="flex gap-4">
@@ -171,7 +205,7 @@ const ContactPage = () => {
                       <MapPin className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <p className="font-medium text-foreground text-sm">Address</p>
+                      <p className="font-medium text-foreground text-sm">{t("Address", "पता")}</p>
                       <p className="text-muted-foreground text-sm">BaelTrees Environmental Trust<br />Bengaluru, Karnataka, India</p>
                     </div>
                   </div>
@@ -181,8 +215,8 @@ const ContactPage = () => {
                       <Phone className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <p className="font-medium text-foreground text-sm">Phone</p>
-                      <p className="text-muted-foreground text-sm">+91 80 1234 5678</p>
+                      <p className="font-medium text-foreground text-sm">{t("Phone", "फोन")}</p>
+                      <p className="text-muted-foreground text-sm">{CONFIG.CONTACT.phone}</p>
                     </div>
                   </div>
                   
@@ -191,8 +225,8 @@ const ContactPage = () => {
                       <Mail className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <p className="font-medium text-foreground text-sm">Email</p>
-                      <p className="text-muted-foreground text-sm">info@BaelTrees.org</p>
+                      <p className="font-medium text-foreground text-sm">{t("Email", "ईमेल")}</p>
+                      <p className="text-muted-foreground text-sm">{CONFIG.CONTACT.email}</p>
                     </div>
                   </div>
                   
@@ -201,21 +235,21 @@ const ContactPage = () => {
                       <Clock className="w-5 h-5 text-primary" />
                     </div>
                     <div>
-                      <p className="font-medium text-foreground text-sm">Working Hours</p>
-                      <p className="text-muted-foreground text-sm">Mon – Sat: 9:00 AM – 6:00 PM</p>
+                      <p className="font-medium text-foreground text-sm">{t("Working Hours", "कार्य के घंटे")}</p>
+                      <p className="text-muted-foreground text-sm">{t("Mon – Sat: 9:00 AM – 6:00 PM", "सोम – शनि: सुबह 9:00 – शाम 6:00")}</p>
                     </div>
                   </div>
                 </div>
               </motion.div>
 
-              {/* Contact Form - Matching original styling with equal height */}
+              {/* Contact Form */}
               <motion.div 
                 initial={{ opacity: 0, x: 20 }} 
                 whileInView={{ opacity: 1, x: 0 }} 
                 viewport={{ once: true }} 
                 className="bg-card rounded-lg border border-border p-6 flex flex-col h-full"
               >
-                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">Send Us a Message</h2>
+                <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-6">{t("Send Us a Message", "हमें संदेश भेजें")}</h2>
                 
                 <form onSubmit={handleSubmit} className="space-y-4 flex-1 flex flex-col">
                   {submitStatus.type && (
@@ -237,7 +271,7 @@ const ContactPage = () => {
                     <div>
                       <input 
                         name="fullName"
-                        placeholder="Full Name *" 
+                        placeholder={t("Full Name *", "पूरा नाम *")}
                         value={formData.fullName}
                         onChange={handleChange}
                         className={`w-full px-3 py-2.5 bg-background border rounded-md text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary ${
@@ -250,7 +284,7 @@ const ContactPage = () => {
                     <div>
                       <input 
                         name="email"
-                        placeholder="Email *" 
+                        placeholder={t("Email *", "ईमेल *")}
                         type="email"
                         value={formData.email}
                         onChange={handleChange}
@@ -266,7 +300,7 @@ const ContactPage = () => {
                     <div>
                       <input 
                         name="phone"
-                        placeholder="Phone Number" 
+                        placeholder={t("Phone Number", "फोन नंबर")}
                         type="tel"
                         value={formData.phone}
                         onChange={handleChange}
@@ -290,12 +324,12 @@ const ContactPage = () => {
                           backgroundSize: '1rem'
                         }}
                       >
-                        <option value="">Subject</option>
-                        <option>General Inquiry</option>
-                        <option>Volunteering</option>
-                        <option>Donation</option>
-                        <option>Partnership</option>
-                        <option>Other</option>
+                        <option value="">{t("Subject", "विषय")}</option>
+                        <option>{t("General Inquiry", "सामान्य पूछताछ")}</option>
+                        <option>{t("Volunteering", "स्वयंसेवा")}</option>
+                        <option>{t("Donation", "दान")}</option>
+                        <option>{t("Partnership", "साझेदारी")}</option>
+                        <option>{t("Other", "अन्य")}</option>
                       </select>
                     </div>
                   </div>
@@ -303,7 +337,7 @@ const ContactPage = () => {
                   <div>
                     <textarea 
                       name="message"
-                      placeholder="Your Message *" 
+                      placeholder={t("Your Message *", "आपका संदेश *")}
                       rows={5}
                       value={formData.message}
                       onChange={handleChange}
@@ -319,50 +353,50 @@ const ContactPage = () => {
                     className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? "Sending..." : "Send Message"}
+                    {isSubmitting ? t("Sending...", "भेजा जा रहा है...") : t("Send Message", "संदेश भेजें")}
                   </Button>
                 </form>
               </motion.div>
             </div>
 
-        {/* Map Section - Preserved size */}
-        <section className="py-12 md:py-20 bg-gradient-to-b from-secondary/20 to-background">
-          <div className="container">
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              viewport={{ once: true }} 
-              className="text-center mb-10"
-            >
-              <p className="text-primary font-medium uppercase tracking-widest text-sm mb-2">Visit Us</p>
-              <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Find Us on the Map</h2>
-              <p className="text-muted-foreground max-w-2xl mx-auto">
-                We're located in the heart of Bengaluru's green district, easily accessible by public transport.
-              </p>
-            </motion.div>
-            
-            <motion.div 
-              initial={{ opacity: 0, y: 20 }} 
-              whileInView={{ opacity: 1, y: 0 }} 
-              viewport={{ once: true }}
-              className="rounded-2xl overflow-hidden border border-border/50 shadow-xl max-w-5xl mx-auto"
-            >
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248849.886539092!2d77.49085452149588!3d12.953847655498412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1709000000000!5m2!1sen!2sin" 
-                width="100%" 
-                height="100%" 
-                style={{ border: 0 }} 
-                allowFullScreen 
-                loading="lazy" 
-                referrerPolicy="no-referrer-when-downgrade" 
-                title="BaelTrees Location"
-                className="w-full hover:opacity-95 transition-opacity"
-              />
-            </motion.div>
-          </div>
-        </section>
+            {/* Map Section */}
+            <section className="py-12 md:py-20 bg-gradient-to-b from-secondary/20 to-background">
+              <div className="container">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }} 
+                  whileInView={{ opacity: 1, y: 0 }} 
+                  viewport={{ once: true }} 
+                  className="text-center mb-10"
+                >
+                  <p className="text-primary font-medium uppercase tracking-widest text-sm mb-2">{t("Visit Us", "हमसे मिलें")}</p>
+                  <h2 className="font-serif text-3xl md:text-4xl text-foreground mb-4">{t("Find Us on the Map", "मानचित्र पर हमें ढूंढें")}</h2>
+                  <p className="text-muted-foreground max-w-2xl mx-auto">
+                    {t("We're located in the heart of Bengaluru's green district, easily accessible by public transport.", "हम बेंगलुरु के हरित जिले के केंद्र में स्थित हैं, सार्वजनिक परिवहन द्वारा आसानी से पहुंचा जा सकता है।")}
+                  </p>
+                </motion.div>
+                
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }} 
+                  whileInView={{ opacity: 1, y: 0 }} 
+                  viewport={{ once: true }}
+                  className="rounded-2xl overflow-hidden border border-border/50 shadow-xl max-w-5xl mx-auto"
+                >
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d248849.886539092!2d77.49085452149588!3d12.953847655498412!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae1670c9b44e6d%3A0xf8dfc3e8517e4fe0!2sBengaluru%2C%20Karnataka!5e0!3m2!1sen!2sin!4v1709000000000!5m2!1sen!2sin" 
+                    width="100%" 
+                    height="100%" 
+                    style={{ border: 0 }} 
+                    allowFullScreen 
+                    loading="lazy" 
+                    referrerPolicy="no-referrer-when-downgrade" 
+                    title="BaelTrees Location"
+                    className="w-full hover:opacity-95 transition-opacity"
+                  />
+                </motion.div>
+              </div>
+            </section>
 
-            {/* FAQ Section - Matching original styling */}
+            {/* FAQ Section */}
             <motion.div 
               initial={{ opacity: 0, y: 20 }} 
               whileInView={{ opacity: 1, y: 0 }} 
@@ -370,8 +404,8 @@ const ContactPage = () => {
               className="mt-12 max-w-3xl mx-auto"
             >
               <div className="text-center mb-8">
-                <h3 className="font-serif text-3xl md:text-4xl text-foreground mb-4">Frequently Asked Questions</h3>
-                <p className="text-muted-foreground max-w-2xl mx-auto">Find quick answers to common questions</p>
+                <h3 className="font-serif text-3xl md:text-4xl text-foreground mb-4">{t("Frequently Asked Questions", "अक्सर पूछे जाने वाले प्रश्न")}</h3>
+                <p className="text-muted-foreground max-w-2xl mx-auto">{t("Find quick answers to common questions", "सामान्य प्रश्नों के त्वरित उत्तर खोजें")}</p>
               </div>
               
               <div className="space-y-3">
@@ -388,14 +422,16 @@ const ContactPage = () => {
                       onClick={() => setOpenFaq(openFaq === i ? null : i)} 
                       className="w-full p-4 text-left flex items-center justify-between gap-4 hover:bg-muted/30 transition-colors"
                     >
-                      <span className="font-medium text-foreground text-sm">{faq.q}</span>
+                      <span className="font-medium text-foreground text-sm">
+                        {t(faq.q.en, faq.q.hi)}
+                      </span>
                       <ChevronDown className={`w-4 h-4 text-muted-foreground shrink-0 transition-transform duration-200 ${openFaq === i ? "rotate-180" : ""}`} />
                     </button>
                     
                     {openFaq === i && (
                       <div className="px-4 pb-4">
                         <p className="text-muted-foreground text-sm leading-relaxed border-t border-border pt-3">
-                          {faq.a}
+                          {t(faq.a.en, faq.a.hi)}
                         </p>
                       </div>
                     )}

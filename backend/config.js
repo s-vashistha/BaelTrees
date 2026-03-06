@@ -17,6 +17,18 @@ const CONFIG = {
   // 7. Click Deploy and copy the URL
   BASE_URL: 'YOUR_GOOGLE_APPSCRIPT_WEB_APP_URL',
   
+  // Bank Details for Donations
+  BANK_DETAILS: {
+    accountName: "BaelTrees Environmental Trust",
+    accountNumber: "1234567890123456",
+    bankName: "State Bank of India",
+    branch: "Bengaluru Main Branch",
+    ifscCode: "SBIN0001234",
+    accountType: "Current Account",
+    upiId: "BaelTrees@upi",
+    contactEmail: "donate@BaelTrees.org"
+  },
+  
   // API endpoints (appended to BASE_URL)
   ENDPOINTS: {
     CONTACT: '/exec',

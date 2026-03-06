@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import donateHero from "@/assets/donate-hero.jpg";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { generateUpiPaymentLink, initiateUpiPayment, isUpiSupported } from "@/lib/formService";
+import { CONFIG } from "@/lib/config";
 
 const amounts = [500, 1000, 2500, 5000, 10000];
 
@@ -136,7 +137,7 @@ const DonatePage = () => {
                     <p className="text-xs text-muted-foreground">UPI QR Code</p>
                   </div>
                 </div>
-                <p className="text-sm text-muted-foreground mb-2">UPI ID: <span className="font-semibold text-foreground">BaelTrees@upi</span></p>
+                <p className="text-sm text-muted-foreground mb-2">UPI ID: <span className="font-semibold text-foreground">{CONFIG.BANK_DETAILS.upiId}</span></p>
                 {activeAmount > 0 && (
                   <div className="bg-green-50 text-green-700 px-4 py-2 rounded-lg text-sm font-medium">
                     Pay ₹{activeAmount.toLocaleString()}
@@ -149,12 +150,12 @@ const DonatePage = () => {
                 <h3 className="font-serif text-xl text-foreground mb-4 text-center">{t("Bank Transfer Details", "बैंक ट्रांसफर विवरण")}</h3>
                 <div className="space-y-3">
                   {[
-                    { label: "Account Name", value: "BaelTrees Environmental Trust" },
-                    { label: "Account Number", value: "1234 5678 9012 3456" },
-                    { label: "Bank Name", value: "State Bank of India" },
-                    { label: "Branch", value: "Bengaluru Main Branch" },
-                    { label: "IFSC Code", value: "SBIN0001234" },
-                    { label: "Account Type", value: "Current Account" },
+                    { label: "Account Name", value: CONFIG.BANK_DETAILS.accountName },
+                    { label: "Account Number", value: CONFIG.BANK_DETAILS.accountNumber },
+                    { label: "Bank Name", value: CONFIG.BANK_DETAILS.bankName },
+                    { label: "Branch", value: CONFIG.BANK_DETAILS.branch },
+                    { label: "IFSC Code", value: CONFIG.BANK_DETAILS.ifscCode },
+                    { label: "Account Type", value: CONFIG.BANK_DETAILS.accountType },
                   ].map((item) => (
                     <div key={item.label} className="flex justify-between items-center border-b border-border pb-2 last:border-0">
                       <span className="text-sm text-muted-foreground">{item.label}</span>
@@ -164,7 +165,7 @@ const DonatePage = () => {
                 </div>
                 <div className="mt-4 bg-secondary rounded-md p-3 flex items-center gap-2">
                   <CreditCard className="w-4 h-4 text-primary shrink-0" />
-                  <p className="text-xs text-muted-foreground">{t("Please share transaction details at", "कृपया लेनदेन विवरण साझा करें")} <span className="text-foreground">donate@BaelTrees.org</span></p>
+                  <p className="text-xs text-muted-foreground">{t("Please share transaction details at", "कृपया लेनदेन विवरण साझा करें")} <span className="text-foreground">{CONFIG.BANK_DETAILS.contactEmail}</span></p>
                 </div>
               </motion.div>
             </div>

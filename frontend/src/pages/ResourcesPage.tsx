@@ -76,7 +76,7 @@ const ResourcesPage = () => {
     <div className="min-h-screen">
       <Navbar />
       <main className="pt-16 md:pt-20">
-        <PageHero title={t("Media Coverage", "αñ«αÑÇαñíαñ┐αñ»αñ╛ αñòαñ╡αñ░αÑçαñ£")} subtitle={t("Paper cuttings, news features, and media recognition of our environmental work.", "αñ╣αñ«αñ╛αñ░αÑç αñ¬αñ░αÑìαñ»αñ╛αñ╡αñ░αñúαÑÇαñ» αñòαñ╛αñ░αÑìαñ» αñòαÑÇ αñàαñûαñ¼αñ╛αñ░ αñòαƒαñ┐αñéαñù, αñ╕αñ«αñ╛αñÜαñ╛αñ░ αñ½αÑÇαñÜαñ░ αñöαñ░ αñ«αÑÇαñíαñ┐αñ»αñ╛ αñ«αñ╛α¿αÑìαñ»αññαñ╛αÑñ")} image={heroBanner} />
+        <PageHero title={t("Media Coverage", "मीडिया कवरेज")} subtitle={t("Paper cuttings, news features, and media recognition of our environmental work.", "कागज कटिंग्स, समाचार फीचर और हमारे पर्यावरण कार्य का मीडिया मान्यता")} image={heroBanner} />
 
         {/* Search */}
         <section className="py-8 bg-card border-b border-border">
@@ -84,7 +84,7 @@ const ResourcesPage = () => {
             <div className="flex items-center justify-center">
               <div className="relative w-full sm:w-96">
                 <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
-                <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={t("Search media coverage...", "αñ«αÑÇαñíαñ┐αñ»αñ╛ αñòαñ╡αñ░αÑçαñ£ αñûαÑïαñ£αÑçαñé...")} className="w-full pl-10 pr-4 py-2 bg-background border border-border rounded-md text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" />
+                <input type="text" value={search} onChange={(e) => setSearch(e.target.value)} placeholder={t("Search media coverage...", "मीडिया कवरेज खोजें...")} className="w-full pl-10 pr-4 py-2 bg-background border border-border rounded-md text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary" />
               </div>
             </div>
           </div>
@@ -112,7 +112,7 @@ const ResourcesPage = () => {
               ))}
             </div>
             {filtered.length === 0 && (
-              <div className="text-center py-12 text-muted-foreground"><p>{t("No articles found. Try a different search.", "αñòαÑïαñê αñ▓αÑçαñû αñ¿αñ╣αÑÇαñé αñ«αñ┐αñ▓αñ╛αÑñ αñàαñ▓αñù αñûαÑïαñ£ αñåαñ£αñ╝αñ«αñ╛αñÅαñéαÑñ")}</p></div>
+              <div className="text-center py-12 text-muted-foreground"><p>{t("No articles found. Try a different search.", "कोई लेख नहीं मिला। कृपया एक अलग खोज करें।")}</p></div>
             )}
           </div>
         </section>
@@ -121,8 +121,8 @@ const ResourcesPage = () => {
         <section className="py-16 md:py-20 bg-primary">
           <div className="container text-center">
             <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}>     
-              <h2 className="font-serif text-3xl text-primary-foreground mb-4">{t("Stay Informed", "αñ£αñ╛αñ¿αñòαñ╛αñ░αÑÇ αñ░αñûαÑçαñé")}</h2>
-              <p className="text-primary-foreground/70 max-w-md mx-auto mb-6">{t("Subscribe to our newsletter for the latest news and updates.", "αñ¿αñ╡αÑÇαñ¿αññαñ« αñ╕αñ«αñ╛αñÜαñ╛αñ░ αñöαñ░ αñàαñ¬αñíαÑçαñƒ αñòαÑç αñ▓αñ┐αñÅ αñ╣αñ«αñ╛αñ░αÑç αñ¿αÑìαñ»αÑéαñ£αñ╝αñ▓αÑçαñƒαñ░ αñòαÑÇ αñ╕αñªαñ╕αÑìαñ»αññαñ╛ αñ▓αÑçαñéαÑñ")}</p>
+              <h2 className="font-serif text-3xl text-primary-foreground mb-4">{t("Stay Informed", "सूचित रहें")}</h2>
+              <p className="text-primary-foreground/70 max-w-md mx-auto mb-6">{t("Subscribe to our newsletter for the latest news and updates.", "नवीनतम समाचार और अपडेट के लिए हमारे न्यूज़लेटर की सदस्यता लें।")}</p>
               {submitStatus.type && (
                 <div className={`mb-4 p-3 rounded-md text-sm max-w-md mx-auto ${submitStatus.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
                   {submitStatus.message}
@@ -131,14 +131,14 @@ const ResourcesPage = () => {
               <form onSubmit={handleNewsletterSubmit} className="flex gap-2 max-w-md mx-auto">
                 <input 
                   type="email" 
-                  placeholder={t("Enter your email", "αñàαñ¬α¿αñ╛ αñêαñ«αÑçαñ▓ αñªαñ░αÑìαñ£ αñòαñ░αÑçαñé")}
+                  placeholder={t("Enter your email", "अपना ईमेल दर्ज करें")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   className="flex-1 px-4 py-2.5 bg-primary-foreground/10 border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/40 rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-primary-foreground/30" 
                 />
                 <Button variant="secondary" type="submit" disabled={isSubmitting} className="gap-2">
                   <Send className="w-4 h-4" /> 
-                  {isSubmitting ? t("Subscribing...", "αñ╕αñªαñ╕αÑìαñ»αññαñ╛ αñ▓αÑçαñéαñ¢...") : t("Subscribe", "αñ╕αñªαñ╕αÑìαñ»αññαñ╛ αñ▓αÑçαñé")}
+                  {isSubmitting ? t("Subscribing...", "सब्सक्राइब हो रहा है...") : t("Subscribe", "सब्सक्राइब")}
                 </Button>
               </form>
             </motion.div>
